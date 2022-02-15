@@ -1,13 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const passport = require('passport');
-require('dotenv').config()
+require('dotenv').config();
 const config = require('./config');
-
-config.credentials.tenantID = process.env.TENANT_ID;
-config.credentials.clientID = process.env.APP_ID;
-
 const BearerStrategy = require('passport-azure-ad').BearerStrategy;
+
+config.credentials.tenantID = process.env.REACT_APP_TENANT_ID;
+config.credentials.clientID = process.env.REACT_APP_APP_ID;
 
 const options = {
   identityMetadata: `https://${config.metadata.authority}/${config.credentials.tenantID}/${config.metadata.version}/${config.metadata.discovery}`,
@@ -41,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 // exposed API endpoint
-app.get('/hello', passport.authenticate('oauth-bearer', { session: false }), (req, res) => {
+app.get('/hello', passport.authenticate('oauth-bearer', {session: false}), (req, res) => {
   // https://jwt.ms
   const jwt = req.headers.authorization.replace('Bearer ', '');
 
@@ -55,12 +54,12 @@ app.get('/hello', passport.authenticate('oauth-bearer', { session: false }), (re
     'issued-by': req.authInfo.iss,
     'issued-for': req.authInfo.aud,
     scope: req.authInfo.scp,
-    
+
     // Records the identity provider that authenticated the subject of the token.
     // This value is identical to the value of the Issuer claim unless the user account not in the same tenant as the issuer - guests, for instance.
     // If the claim is not present, it means that the value of iss can be used instead.
     // For personal accounts being used in an orgnizational context (for instance, a personal account invited to an Azure AD tenant), the idp claim may be 'live.com' or an STS URI containing the Microsoft account tenant id.
-    'identity-provider': req.authInfo.idp
+    'identity-provider': req.authInfo.idp,
   });
 });
 

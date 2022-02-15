@@ -13,7 +13,7 @@ const cloudInstanceId = process.env.REACT_APP_CLOUD_INSTANCE_ID; // Cloud_Instan
 // If your application supports accounts in any organizational directory and personal Microsoft accounts: common. Defaults to "common"
 const tenantId = process.env.REACT_APP_TENANT_ID; // Tenant_Id
 
-const authority = `${cloudInstanceId}${tenantId ? "/" : ""}${tenantId}${tenantId ? "/" : ""}`;
+const authority = `${cloudInstanceId}${tenantId ? "/" : ""}${tenantId}`;
 
 // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
 const redirectUri = process.env.REACT_APP_REDIRECT_URI; // Redirect_Uri
@@ -52,12 +52,15 @@ export const msalConfig = {
           case LogLevel.Error:
             console.error(message);
             return;
+
           case LogLevel.Info:
             console.info(message);
             return;
+
           case LogLevel.Verbose:
             console.debug(message);
             return;
+
           case LogLevel.Warning:
             console.warn(message);
             return;

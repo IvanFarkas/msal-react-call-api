@@ -344,7 +344,7 @@ Function ConfigureApplications
    # Update config file for 'spa'
    $configFile = $pwd.Path + "\..\SPA\src\authConfig.js"
    Write-Host "Updating the sample code ($configFile)"
-   $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId;"Enter_the_Tenant_Info_Here" = $tenantId;"Enter_the_Web_Api_Scope_Here" = ("api://"+$serviceAadApplication.AppId+"/access_as_user") };
+   $dictionary = @{ "Application_Id" = $spaAadApplication.AppId;"Tenant_Id" = $tenantId;"Web_Api_Scope" = ("api://"+$serviceAadApplication.AppId+"/access_as_user") };
    ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
    # Update config file for 'service'
