@@ -4,13 +4,13 @@
     "Level": 200,
     "Client": "React SPA",
     "Service": "Node.js web API",
-    "RepositoryUrl": "ms-identity-javascript-react-tutorial",
+    "RepositoryUrl": "msal-react-call-api",
     "Endpoint": "AAD v2.0"
   },
   "AADApps": [
     {
       "Id": "service",
-      "Name": "ms-identity-react-c3s1-api",
+      "Name": "msal-react-call-api-api",
       "Kind": "WebApi",
       "HomePage": "http://localhost:5000/api",
       "Audience": "AzureADMyOrg",
@@ -22,7 +22,7 @@
     },
     {
       "Id": "spa",
-      "Name": "ms-identity-react-c3s1-spa",
+      "Name": "msal-react-call-api-spa",
       "Kind": "SinglePageApplication",
       "Audience": "AzureADMyOrg",
       "HomePage": "http://localhost:3000/",

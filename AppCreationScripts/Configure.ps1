@@ -233,9 +233,9 @@ Function ConfigureApplications
     $user = Get-AzureADUser -ObjectId $creds.Account.Id
 
    # Create the service AAD application
-   Write-Host "Creating the AAD application (ms-identity-react-c3s1-api)"
+   Write-Host "Creating the AAD application (msal-react-call-api-api)"
    # create the application 
-   $serviceAadApplication = New-AzureADApplication -DisplayName "ms-identity-react-c3s1-api" `
+   $serviceAadApplication = New-AzureADApplication -DisplayName "msal-react-call-api-api" `
                                                    -HomePage "http://localhost:5000/api" `
                                                    -PublicClient $False
 
@@ -272,9 +272,9 @@ Function ConfigureApplications
         {
             # Add scope
             $scope = CreateScope -value "access_as_user"  `
-                -userConsentDisplayName "Access ms-identity-react-c3s1-api"  `
-                -userConsentDescription "Allow the application to access ms-identity-react-c3s1-api on your behalf."  `
-                -adminConsentDisplayName "Access ms-identity-react-c3s1-api"  `
+                -userConsentDisplayName "Access msal-react-call-api-api"  `
+                -userConsentDescription "Allow the application to access msal-react-call-api-api on your behalf."  `
+                -adminConsentDisplayName "Access msal-react-call-api-api"  `
                 -adminConsentDescription "Allows the app to have the same access to information in the directory on behalf of the signed-in user."
             
             $scopes.Add($scope)
@@ -284,21 +284,21 @@ Function ConfigureApplications
     # add/update scopes
     Set-AzureADApplication -ObjectId $serviceAadApplication.ObjectId -OAuth2Permission $scopes
 
-   Write-Host "Done creating the service application (ms-identity-react-c3s1-api)"
+   Write-Host "Done creating the service application (msal-react-call-api-api)"
 
    # URL of the AAD application in the Azure portal
    # Future? $servicePortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$serviceAadApplication.AppId+"/objectId/"+$serviceAadApplication.ObjectId+"/isMSAApp/"
    $servicePortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$serviceAadApplication.AppId+"/objectId/"+$serviceAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>service</td><td>$currentAppId</td><td><a href='$servicePortalUrl'>ms-identity-react-c3s1-api</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>service</td><td>$currentAppId</td><td><a href='$servicePortalUrl'>msal-react-call-api-api</a></td></tr>" -Path createdApps.html
 
 
    # Create the spa AAD application
-   Write-Host "Creating the AAD application (ms-identity-react-c3s1-spa)"
+   Write-Host "Creating the AAD application (msal-react-call-api-spa)"
    # create the application 
-   $spaAadApplication = New-AzureADApplication -DisplayName "ms-identity-react-c3s1-spa" `
+   $spaAadApplication = New-AzureADApplication -DisplayName "msal-react-call-api-spa" `
                                                -HomePage "http://localhost:3000/" `
                                                -ReplyUrls "http://localhost:3000/" `
-                                               -IdentifierUris "https://$tenantName/ms-identity-react-c3s1-spa" `
+                                               -IdentifierUris "https://$tenantName/msal-react-call-api-spa" `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -314,12 +314,12 @@ Function ConfigureApplications
    }
 
 
-   Write-Host "Done creating the spa application (ms-identity-react-c3s1-spa)"
+   Write-Host "Done creating the spa application (msal-react-call-api-spa)"
 
    # URL of the AAD application in the Azure portal
    # Future? $spaPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
    $spaPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$spaAadApplication.AppId+"/objectId/"+$spaAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>ms-identity-react-c3s1-spa</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>spa</td><td>$currentAppId</td><td><a href='$spaPortalUrl'>msal-react-call-api-spa</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 
@@ -332,7 +332,7 @@ Function ConfigureApplications
 
    # Add Required Resources Access (from 'spa' to 'service')
    Write-Host "Getting access from 'spa' to 'service'"
-   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "ms-identity-react-c3s1-api" `
+   $requiredPermissions = GetRequiredPermissions -applicationDisplayName "msal-react-call-api-api" `
                                                 -requiredDelegatedPermissions "access_as_user" `
 
    $requiredResourcesAccess.Add($requiredPermissions)

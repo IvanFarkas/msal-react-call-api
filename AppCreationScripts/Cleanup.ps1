@@ -59,9 +59,9 @@ Function Cleanup
     # Removes the applications
     Write-Host "Cleaning-up applications from tenant '$tenantName'"
 
-    Write-Host "Removing 'service' (ms-identity-react-c3s1-api) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-react-c3s1-api'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
-    $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-react-c3s1-api'"
+    Write-Host "Removing 'service' (msal-react-call-api-api) if needed"
+    Get-AzureADApplication -Filter "DisplayName eq 'msal-react-call-api-api'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    $apps = Get-AzureADApplication -Filter "DisplayName eq 'msal-react-call-api-api'"
     if ($apps)
     {
         Remove-AzureADApplication -ObjectId $apps.ObjectId
@@ -70,14 +70,14 @@ Function Cleanup
     foreach ($app in $apps) 
     {
         Remove-AzureADApplication -ObjectId $app.ObjectId
-        Write-Host "Removed ms-identity-react-c3s1-api.."
+        Write-Host "Removed msal-react-call-api-api.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-react-c3s1-api'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    Get-AzureADServicePrincipal -filter "DisplayName eq 'msal-react-call-api-api'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
     
-    Write-Host "Removing 'spa' (ms-identity-react-c3s1-spa) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-react-c3s1-spa'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
-    $apps = Get-AzureADApplication -Filter "DisplayName eq 'ms-identity-react-c3s1-spa'"
+    Write-Host "Removing 'spa' (msal-react-call-api-spa) if needed"
+    Get-AzureADApplication -Filter "DisplayName eq 'msal-react-call-api-spa'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    $apps = Get-AzureADApplication -Filter "DisplayName eq 'msal-react-call-api-spa'"
     if ($apps)
     {
         Remove-AzureADApplication -ObjectId $apps.ObjectId
@@ -86,10 +86,10 @@ Function Cleanup
     foreach ($app in $apps) 
     {
         Remove-AzureADApplication -ObjectId $app.ObjectId
-        Write-Host "Removed ms-identity-react-c3s1-spa.."
+        Write-Host "Removed msal-react-call-api-spa.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'ms-identity-react-c3s1-spa'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    Get-AzureADServicePrincipal -filter "DisplayName eq 'msal-react-call-api-spa'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
     
 }
 

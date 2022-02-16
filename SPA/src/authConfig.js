@@ -1,5 +1,5 @@
 // Tutorial: A React SPA using MSAL React to authorize users for calling a protected web API on AAD
-//   https://github.com/Azure-Samples/ms-identity-javascript-react-tutorial/tree/main/3-Authorization-II/1-call-api
+//   https://github.com/IvanFarkas/msal-react-call-api/tree/main/3-Authorization-II/1-call-api
 import { LogLevel } from '@azure/msal-browser';
 
 // https://docs.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-react
