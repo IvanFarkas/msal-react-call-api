@@ -252,10 +252,24 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 On the web API side, [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) validates the token against the `issuer`, `scope` and `audience` claims (defined in `BearerStrategy` constructor) using the `passport.authenticate()` API:
 
 ```javascript
-    app.get('/api', passport.authenticate('oauth-bearer', { session: false }),
-        (req, res) => {
-            console.log('Validated claims: ', req.authInfo);
-    );
+app.get('/hello', passport.authenticate('oauth-bearer', { session: false }), (req, res) => {
+  console.log('Validated claims: ', req.authInfo);
+
+  // Service relies on the name claim.
+  res.status(200).json({
+    name: req.authInfo.name,
+    email: req.authInfo.preferred_username,
+    'issued-by': req.authInfo.iss,
+    'issued-for': req.authInfo.aud,
+    scope: req.authInfo.scp,
+
+    // Records the identity provider that authenticated the subject of the token.
+    // This value is identical to the value of the Issuer claim unless the user account not in the same tenant as the issuer - guests, for instance.
+    // If the claim is not present, it means that the value of iss can be used instead.
+    // For personal accounts being used in an orgnizational context (for instance, a personal account invited to an Azure AD tenant), the idp claim may be 'live.com' or an STS URI containing the Microsoft account tenant id.
+    'identity-provider': req.authInfo.idp,
+  });
+});
 ```
 
 Clients should treat access tokens as opaque strings, as the contents of the token are intended for the resource only (such as a web API or Microsoft Graph). For validation and debugging purposes, developers can decode **JWT**s (*JSON Web Tokens*) using a site like [jwt.ms](https://jwt.ms).
@@ -265,11 +279,11 @@ Clients should treat access tokens as opaque strings, as the contents of the tok
 For the purpose of the sample, **cross-origin resource sharing** is enabled for **all** domains. This is insecure and not recommended. In production, you should modify this as to allow only the domains that you designate.
 
 ```javascript
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 ```
 
 ## More information
