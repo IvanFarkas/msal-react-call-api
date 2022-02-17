@@ -1,6 +1,6 @@
 // Tutorial: A React SPA using MSAL React to authorize users for calling a protected web API on AAD
 //   https://github.com/IvanFarkas/msal-react-call-api/tree/main/3-Authorization-II/1-call-api
-import {LogLevel} from '@azure/msal-browser';
+import { LogLevel } from '@azure/msal-browser';
 
 // https://docs.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-react
 // The Application (client) ID of the application you registered. the ONLY mandatory field that need to be supplied.

@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-import {MsalAuthenticationTemplate, useMsal, useAccount} from '@azure/msal-react';
-import {InteractionRequiredAuthError, InteractionType} from '@azure/msal-browser';
+import { MsalAuthenticationTemplate, useMsal, useAccount } from '@azure/msal-react';
+import { InteractionRequiredAuthError, InteractionType } from '@azure/msal-browser';
 
-import {loginRequest, protectedResources} from '../authConfig';
-import {callApiWithToken} from '../fetch';
-import {HelloData} from '../components/DataDisplay';
+import { loginRequest, protectedResources } from '../authConfig';
+import { callApiWithToken } from '../fetch';
+import { HelloData } from '../components/DataDisplay';
 
 const HelloContent = () => {
   /**
@@ -14,7 +14,7 @@ const HelloContent = () => {
    * that tells you what msal is currently doing. For more, visit:
    * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/hooks.md
    */
-  const {instance, accounts, inProgress} = useMsal();
+  const { instance, accounts, inProgress } = useMsal();
   const account = useAccount(accounts[0] || {});
   const [helloData, setHelloData] = useState(null);
 

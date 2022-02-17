@@ -1,5 +1,5 @@
 import '../styles/App.css';
-import {protectedResources} from '../authConfig';
+import { protectedResources } from '../authConfig';
 
 export const ProfileData = (props) => {
   const tableRows = Object.entries(props.graphData).map((entry, index) => {

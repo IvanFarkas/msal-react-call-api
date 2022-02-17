@@ -1,11 +1,11 @@
-import {AuthenticatedTemplate, UnauthenticatedTemplate, useMsal} from '@azure/msal-react';
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 
-import {Nav, Navbar, Button, Dropdown, DropdownButton} from 'react-bootstrap';
+import { Nav, Navbar, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 
-import {loginRequest} from '../authConfig';
+import { loginRequest } from '../authConfig';
 
 export const NavigationBar = () => {
-  const {instance} = useMsal();
+  const { instance } = useMsal();
 
   /**
    * Most applications will need to conditionally render certain components based on whether a user is signed in or not.
@@ -33,11 +33,10 @@ export const NavigationBar = () => {
                   postLogoutRedirectUri: '/',
                   mainWindowRedirectUri: '/',
                 })
-              }
-            >
+              }>
               Sign out using Popup
             </Dropdown.Item>
-            <Dropdown.Item as="button" onClick={() => instance.logoutRedirect({postLogoutRedirectUri: '/'})}>
+            <Dropdown.Item as="button" onClick={() => instance.logoutRedirect({ postLogoutRedirectUri: '/' })}>
               Sign out using Redirect
             </Dropdown.Item>
           </DropdownButton>
