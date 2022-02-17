@@ -39,7 +39,7 @@ const ProfileContent = () => {
                 .then((response) => {
                   callApiWithToken(response.accessToken, protectedResources.graphMe.endpoint).then((response) => setGraphData(response));
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => console.error(error));
             }
           }
         });

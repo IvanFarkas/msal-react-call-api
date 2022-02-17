@@ -39,7 +39,7 @@ const HelloContent = () => {
                 .then((response) => {
                   callApiWithToken(response.accessToken, protectedResources.apiHello.endpoint).then((response) => setHelloData(response));
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => console.error(error));
             }
           }
         });
