@@ -41,10 +41,6 @@ app.use((req, res, next) => {
 
 // exposed API endpoint
 app.get('/hello', passport.authenticate('oauth-bearer', {session: false}), (req, res) => {
-  // https://jwt.ms
-  const jwt = req.headers.authorization.replace('Bearer ', '');
-
-  console.log('jwt: ', jwt);
   console.log('Validated claims: ', req.authInfo);
 
   // Service relies on the name claim.
