@@ -18,28 +18,24 @@ const options = {
   loggingLevel: config.settings.loggingLevel,
   scope: config.protectedRoutes.hello.scopes,
 };
-
 const bearerStrategy = new BearerStrategy(options, (token, done) => {
   // Send user info using the second argument
   done(null, {}, token);
 });
-
 const app = express();
 
 app.use(morgan('dev'));
-
 app.use(passport.initialize());
-
 passport.use(bearerStrategy);
 
-// enable CORS (in production, modify as to allow only designated origins)
+// Enable CORS (in production, modify as to allow only designated origins)
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-// exposed API endpoint
+// Exposed API endpoint
 app.get('/hello', passport.authenticate('oauth-bearer', { session: false }), (req, res) => {
   console.log('Validated claims: ', req.authInfo);
 

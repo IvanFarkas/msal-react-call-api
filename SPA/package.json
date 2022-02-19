@@ -1,7 +1,7 @@
 {
   "name": "msal-react-call-api",
   "version": "0.1.0",
-  "description": "A React single-page application using MSAL React to call a protected web API on Azure Active Directory",
+  "description": "A React SPA using MSAL React to call a protected web API on AAD",
   "author": "Ivan Farkas",
   "repository": {
     "type": "git",
